@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
-while getopts ":t:c:l:o:f:i:k:z:e:" o; do
+
+
+DOCKLE_IGNORES=${INPUT_IGNORE}
+DOCKLE_ACCEPT_KEYS=${INPUT_ACCEPT-KEY}
+DOCKLE_ACCEPT_FILES=${INPUT_ACCEPT-FILE}
+DOCKLE_ACCEPT_FILE_EXTENSIONS=${INPUT_ACCEPT-FILE-EXTENSION}
+
+while getopts ":t:c:l:o:f:" o; do
    case "${o}" in
        t)
          export imageName=${OPTARG}
@@ -16,18 +23,6 @@ while getopts ":t:c:l:o:f:i:k:z:e:" o; do
          ;;
        f)
          export format=${OPTARG}
-         ;;
-       i)
-         export DOCKLE_IGNORES=${OPTARG}
-         ;;
-       k)
-         export DOCKLE_ACCEPT_KEYS=${OPTARG}
-         ;;
-       z)
-         export DOCKLE_ACCEPT_FILES=${OPTARG}
-         ;;
-       e)
-         export DOCKLE_ACCEPT_FILE_EXTENSIONS=${OPTARG}
          ;;
        \?)
          echo "unknown flag"
