@@ -42,4 +42,5 @@ if [ $output ];then
   export ARGS="$ARGS --output $output"
 fi
 echo $ARGS
+env
 /usr/bin/dockle $ARGS $1
