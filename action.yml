@@ -1,0 +1,43 @@
+name: 'Dockle - Container Image Linter'
+description: 'Scans container image configurations'
+author: 'Tomoya AMACHI'
+inputs:
+  exit-code:
+    description: 'exit code when notifications were found'
+    required: false
+    default: '1'
+  exit-level:
+    description: 'exit level when notifications were found'
+    required: false
+    default: 'warn'
+  format:
+    description: 'output format (list, json, sarif)'
+    required: false
+    default: 'list'
+  ignore:
+    description: 'comma-separated list of code'
+    required: false
+    default: ''
+  accept-key:
+    description: 'Accept suspicious environment variables'
+    required: false
+    default: ''
+  accept-file:
+    description: 'Accept suspicious file names'
+    required: false
+    default: ''
+  accept-file-extension:
+    description: 'Accept suspicious file extensions'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - '-c ${{ inputs.exit-code }}'
+    - '-c ${{ inputs.exit-level }}'
+    - '-f ${{ inputs.format }}'
+    - '-i ${{ inputs.ignore }}'
+    - '-k ${{ inputs.accept-key }}'
+    - '-f ${{ inputs.accept-file }}'
+    - '-e ${{ inputs.accept-file-extension }}'
