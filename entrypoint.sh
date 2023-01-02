@@ -28,18 +28,18 @@ while getopts "c:l:f:i:k:f:e:" o; do
          ;;
   esac
 done
-ARGS=""
+export ARGS=""
 if [ $format ];then
- ARGS="$ARGS --format $format"
+ export ARGS="$ARGS --format $format"
 fi
 if [ $exitCode ];then
- ARGS="$ARGS --exit-code $exitCode"
+ export ARGS="$ARGS --exit-code $exitCode"
 fi
 if [ $exitLevel ];then
- ARGS="$ARGS --exit-level $exitLevel"
+ export ARGS="$ARGS --exit-level $exitLevel"
 fi
 if [ $output ];then
-  ARGS="$ARGS --output $output"
+  export ARGS="$ARGS --output $output"
 fi
 echo $ARGS
 /usr/bin/dockle $ARGS $1
