@@ -41,4 +41,12 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - "-t '${{ inputs.image }}' -c '${{ inputs.exit-code }}' -l '${{ inputs.exit-level }}' -f '${{ inputs.format }}' -o '${{ inputs.output }}' -i '${{ inputs.ignore }}' -k '${{ inputs.accept-key }}' -z '${{ inputs.accept-file }}' -e '${{ inputs.accept-file-extension }}'"
+    - -t ${{ inputs.image }}
+    - -c ${{ inputs.exit-code }}
+    - -l ${{ inputs.exit-level }}
+    - -f ${{ inputs.format }}
+    - -o '${{ inputs.output }}'
+    - -i '${{ inputs.ignore }}'
+    - -k '${{ inputs.accept-key }}'
+    - -z '${{ inputs.accept-file }}'
+    - -e '${{ inputs.accept-file-extension }}'
