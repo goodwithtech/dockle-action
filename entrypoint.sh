@@ -41,5 +41,5 @@ fi
 if [ $output ];then
   ARGS="$ARGS --output $output"
 fi
-
+echo $ARGS
 /usr/bin/dockle $ARGS $1
