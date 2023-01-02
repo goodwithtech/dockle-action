@@ -1,6 +1,6 @@
-#!/bin/sh -l
+#!/bin/sh
 set -e
-while getopts "c:l:f:i:k:f:e:" o; do
+while getopts ":c:l:f:i:k:f:e:" o; do
    case "${o}" in
        c)
          export exitCode=${OPTARG}
@@ -26,21 +26,26 @@ while getopts "c:l:f:i:k:f:e:" o; do
        e)
          export DOCKLE_ACCEPT_FILE_EXTENSIONS=${OPTARG}
          ;;
+       \?)
+         echo "unknown flag"
+         ;;
   esac
 done
-export ARGS=""
+
+shift  $(($OPTIND - 1))
+
+ARGS=""
 if [ $format ];then
- export ARGS="$ARGS --format $format"
+ ARGS="$ARGS --format $format"
 fi
 if [ $exitCode ];then
- export ARGS="$ARGS --exit-code $exitCode"
+ ARGS="$ARGS --exit-code $exitCode"
 fi
 if [ $exitLevel ];then
- export ARGS="$ARGS --exit-level $exitLevel"
+ ARGS="$ARGS --exit-level $exitLevel"
 fi
 if [ $output ];then
-  export ARGS="$ARGS --output $output"
+ ARGS="$ARGS --output $output"
 fi
-echo $ARGS
-env
+
 /usr/bin/dockle $ARGS $1
