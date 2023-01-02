@@ -8,6 +8,9 @@ while getopts "c:l:f:i:k:f:e:" o; do
        l)
          export exitLevel=${OPTARG}
          ;;
+       o)
+         export output=${OPTARG}
+         ;;
        f)
          export format=${OPTARG}
          ;;
@@ -25,5 +28,18 @@ while getopts "c:l:f:i:k:f:e:" o; do
          ;;
   esac
 done
+ARGS=""
+if [ $format ];then
+ ARGS="$ARGS --format $format"
+fi
+if [ $exitCode ];then
+ ARGS="$ARGS --exit-code $exitCode"
+fi
+if [ $exitLevel ];then
+ ARGS="$ARGS --exit-level $exitLevel"
+fi
+if [ $output ];then
+  ARGS="$ARGS --output $output"
+fi
 
-/usr/bin/dockle --exit-code ${exitCode} --exit-level ${exitLevel} --format ${format} $1
+/usr/bin/dockle $ARGS $1

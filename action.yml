@@ -2,6 +2,9 @@ name: 'Dockle - Container Image Linter'
 description: 'Scans container image configurations'
 author: 'Tomoya AMACHI'
 inputs:
+  image:
+    description: 'target container image name'
+    required: true
   exit-code:
     description: 'exit code when notifications were found'
     required: false
@@ -10,6 +13,10 @@ inputs:
     description: 'exit level when notifications were found'
     required: false
     default: 'warn'
+  output:
+    description: 'writes results to a file with the specified file name'
+    required: false
+    default: ''
   format:
     description: 'output format (list, json, sarif)'
     required: false
@@ -34,6 +41,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - '${{ inputs.image }}'
     - '-c ${{ inputs.exit-code }}'
     - '-c ${{ inputs.exit-level }}'
     - '-f ${{ inputs.format }}'
