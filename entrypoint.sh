@@ -46,6 +46,4 @@ if [ $output ];then
  ARGS="$ARGS --output $output"
 fi
 
-echo "/usr/bin/dockle $ARGS $imageName"
-env
 /usr/bin/dockle $ARGS $imageName
