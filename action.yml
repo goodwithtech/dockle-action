@@ -41,11 +41,11 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '${{ inputs.image }}'
     - '-c ${{ inputs.exit-code }}'
-    - '-c ${{ inputs.exit-level }}'
+    - '-l ${{ inputs.exit-level }}'
     - '-f ${{ inputs.format }}'
     - '-i ${{ inputs.ignore }}'
     - '-k ${{ inputs.accept-key }}'
     - '-f ${{ inputs.accept-file }}'
     - '-e ${{ inputs.accept-file-extension }}'
+    - '-t ${{ inputs.image }}'

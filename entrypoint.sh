@@ -2,6 +2,9 @@
 set -e
 while getopts ":c:l:f:i:k:f:e:" o; do
    case "${o}" in
+       t)
+         export imageName=${OPTARG}
+         ;;
        c)
          export exitCode=${OPTARG}
          ;;
@@ -48,4 +51,4 @@ if [ $output ];then
  ARGS="$ARGS --output $output"
 fi
 
-/usr/bin/dockle $ARGS $1
+/usr/bin/dockle $ARGS $imageName
