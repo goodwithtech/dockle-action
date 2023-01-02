@@ -42,7 +42,7 @@ runs:
   image: 'Dockerfile'
   args:
     - -t '${{ inputs.image }}'
-    - -c '${{ inputs.exit-code }}'
+    - -c ${{ inputs.exit-code }}
     - -l '${{ inputs.exit-level }}'
     - -f '${{ inputs.format }}'
     - -i '${{ inputs.ignore }}'
