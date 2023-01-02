@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-while getopts ":c:l:f:i:k:f:e:" o; do
+while getopts ":t:c:l:o:f:i:k:z:e:" o; do
    case "${o}" in
        t)
          export imageName=${OPTARG}
@@ -23,7 +23,7 @@ while getopts ":c:l:f:i:k:f:e:" o; do
        k)
          export DOCKLE_ACCEPT_KEYS=${OPTARG}
          ;;
-       f)
+       z)
          export DOCKLE_ACCEPT_FILES=${OPTARG}
          ;;
        e)
@@ -35,7 +35,7 @@ while getopts ":c:l:f:i:k:f:e:" o; do
   esac
 done
 
-shift  $(($OPTIND - 1))
+#shift  $(($OPTIND - 1))
 
 ARGS=""
 if [ $format ];then
