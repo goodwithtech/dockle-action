@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -l
 set -e
 while getopts "c:l:f:i:k:f:e:" o; do
    case "${o}" in
