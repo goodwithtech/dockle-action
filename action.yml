@@ -5,18 +5,18 @@ inputs:
   image:
     description: 'target container image name'
     required: true
+  output:
+    description: 'output file name'
+    required: false
+    default: ''
   exit-code:
-    description: 'exit code when notifications were found'
+    description: 'exit code when alert were found'
     required: false
     default: '1'
   exit-level:
-    description: 'exit level when notifications were found'
+    description: 'change ABEND level when use exit-code=1'
     required: false
     default: 'warn'
-  output:
-    description: 'writes results to a file with the specified file name'
-    required: false
-    default: ''
   format:
     description: 'output format (list, json, sarif)'
     required: false
@@ -26,20 +26,66 @@ inputs:
     required: false
     default: ''
   accept-key:
-    description: 'Accept suspicious environment variables'
+    description: 'For CIS-DI-0010. You can add acceptable keywords. e.g) GPG_KEY,KEYCLOAK'
     required: false
     default: ''
   accept-file:
-    description: 'Accept suspicious file names'
+    description: 'For CIS-DI-0010. You can add acceptable file names. e.g) id_rsa,config.json'
     required: false
     default: ''
   accept-file-extension:
-    description: 'Accept suspicious file extensions'
+    description: 'For CIS-DI-0010. You can add acceptable file extensions. e.g) pem,log'
     required: false
     default: ''
+  sensitive-word:
+    description: 'For CIS-DI-0010. You can add sensitive keywords to look for. e.g) -ak api_password -sw keys'
+    required: false
+  quiet:
+    description: 'suppress log output'
+    required: false
+  no-color:
+    description: 'disabling color output'
+    required: false
+  timeout:
+    description: 'docker timeout. e.g) 5s, 5m...'
+    required: false
+  use-xdg:
+    description: 'Docker daemon host file  XDG_RUNTIME_DIR'
+    required: false
+  host:
+    description: 'docker daemon host'
+    required: false
+  authurl:
+    description: 'registry authenticate url'
+    required: false
+  username:
+    description: 'registry login username'
+    required: false
+  password:
+    description: 'registry login password. Using --password via CLI is insecure.'
+    required: false
+  insecure:
+    description: 'registry connect insecure'
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    DOCKLE_IGNORES: ${{ inputs.ignore }}
+    DOCKLE_ACCEPT_KEYS: ${{ inputs.accept-key }}
+    DOCKLE_REJECT_KEYS: ${{ inputs.sensitive-word }}
+    DOCKLE_ACCEPT_FILES: ${{ inputs.accept-file }}
+    DOCKLE_ACCEPT_FILE_EXTENSIONS: ${{ inputs.accept-file-extension }}
+    NO_COLOR: ${{ inputs.no-color }}
+    DOCKLE_VERSION_CHECK: ${{ inputs.version-check }}
+    DOCKLE_TIMEOUT: ${{ inputs.timeout }}
+    USE_XDG: ${{ inputs.use-xdg }}
+    DOCKLE_HOST: ${{ inputs.host }}
+    DOCKLE_AUTH_URL: ${{ inputs.authurl }}
+    DOCKLE_USERNAME: ${{ inputs.username }}
+    DOCKLE_PASSWORD: ${{ inputs.password }}
+    DOCKLE_INSECURE: ${{ inputs.insecure }}
   args:
     - -t ${{ inputs.image }}
     - -c ${{ inputs.exit-code }}

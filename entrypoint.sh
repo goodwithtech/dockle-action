@@ -1,12 +1,6 @@
 #!/bin/sh
 set -e
 
-
-export DOCKLE_IGNORES=${INPUT_IGNORE}
-export DOCKLE_ACCEPT_KEYS=${INPUT_ACCEPT-KEY}
-export DOCKLE_ACCEPT_FILES=${INPUT_ACCEPT-FILE}
-export DOCKLE_ACCEPT_FILE_EXTENSIONS=${INPUT_ACCEPT-FILE-EXTENSION}
-
 while getopts ":t:c:l:o:f:" o; do
    case "${o}" in
        t)
@@ -45,5 +39,8 @@ fi
 if [ $output ];then
  ARGS="$ARGS --output $output"
 fi
+
+env
+echo $ARGS
 
 /usr/bin/dockle $ARGS $imageName
