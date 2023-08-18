@@ -10,6 +10,10 @@ Dockle helps you:
 2. Build secure Docker images
   - Checkpoints include CIS Benchmarks
 
+# Examples
+
+- https://github.com/goodwithtech/dockle-action-test/blob/main/.github/workflows/simple-stdout.yml
+- https://github.com/goodwithtech/dockle-action-test/blob/main/.github/workflows/output-json-file.yml
 
 # Usage
 
