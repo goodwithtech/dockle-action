@@ -49,6 +49,7 @@ inputs:
   timeout:
     description: 'docker timeout. e.g) 5s, 5m...'
     required: false
+    default: '10m'
   use-xdg:
     description: 'Docker daemon host file  XDG_RUNTIME_DIR'
     required: false
