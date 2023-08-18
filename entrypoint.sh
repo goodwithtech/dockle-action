@@ -40,7 +40,4 @@ if [ $output ];then
  ARGS="$ARGS --output $output"
 fi
 
-env
-echo $ARGS
-
 /usr/bin/dockle $ARGS $imageName
