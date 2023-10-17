@@ -4,19 +4,19 @@ set -ex
 while getopts ":t:c:l:o:f:" o; do
   case "${o}" in
   t)
-    export imageName=${OPTARG}
+    export imageName="$(echo "${OPTARG}" | sed 's/^ *\| *$//')"
     ;;
   c)
-    export exitCode=${OPTARG}
+    export exitCode="$(echo "${OPTARG}" | sed 's/^ *\| *$//')"
     ;;
   l)
-    export exitLevel=${OPTARG}
+    export exitLevel="$(echo "${OPTARG}" | sed 's/^ *\| *$//')"
     ;;
   o)
-    export output=${OPTARG}
+    export output="$(echo "${OPTARG}" | sed 's/^ *\| *$//')"
     ;;
   f)
-    export format=${OPTARG}
+    export format="$(echo "${OPTARG}" | sed 's/^ *\| *$//')"
     ;;
   \?)
     echo "unknown flag"
